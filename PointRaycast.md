@@ -18,6 +18,8 @@ Most of the adjustments come from the Visual Effects Graph parameters and C# scr
 
 ### List Of VFX Graph Parameters
 
+![s20](/assets/images/03.png)
+
 * **MASTER** -  These parameters serve as a final layer of adjustments, they just multiply existing parameters by themselves.
 * **Dissolve Noise** - Use Dissolve instead of a regular alpha decay for lightning strips.
 * **Lightning** - This set of parameters controls the color, gradient transitions, and emission power of VFX elements.
@@ -67,6 +69,8 @@ Other Parameters:
 * **HIDDEN Parameters** - VFX Graph Won't allow hidden parameters to be changed from outside, so these are currently visible, don't change them.
 
 ### List Of C# Script Parameters
+
+![s20](/assets/images/02.png)
 
 * **Preview Gizmos In Editor** - Use this to preview Gizmos in the Editor to adjust the Max Distance.
 * **Modes** - Two self-explanatory modes, Spherical and Cone.
