@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Custom Vertex Streams
-nav_order: 5
+title: Enchant
+nav_order: 4
 ---
 
 ## Custom Vertex Streams
