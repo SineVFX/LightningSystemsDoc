@@ -23,6 +23,7 @@ Most of the adjustments come from the Visual Effects Graph parameters and C# scr
 * Lightning - This set of parameters controls the color, gradient transitions, and emission power of VFX elements.
 
 
+
 * Strips:
 * Strips Texture - Main texture for lightning strips.
 * Strips EoL - Emission Over Lifetime.
@@ -32,6 +33,8 @@ Most of the adjustments come from the Visual Effects Graph parameters and C# scr
 * Strips Noise - Controls the Offset Noise that makes lightning look like lightning.
 * Strips Noise PoL - Noise Power (Offset Intensity) over Lifetime.
 * Strips NPoL - Noise Position over Lifetime.
+
+
 
 * Hit:
 * Hit Texture - Main texture used for hit effects.
