@@ -22,7 +22,7 @@ Most of the adjustments come from the Visual Effects Graph parameters and C# scr
 * Dissolve Noise - Use Dissolve instead of a regular alpha decay for lightning strips.
 * Lightning - This set of parameters controls the color, gradient transitions, and emission power of VFX elements.
  
-* Strips:
+Strips:
 * Strips Texture - Main texture for lightning strips.
 * Strips EoL - Emission Over Lifetime.
 * Strips SAoL - Size and Alpha Over Lifetime.
@@ -32,22 +32,20 @@ Most of the adjustments come from the Visual Effects Graph parameters and C# scr
 * Strips Noise PoL - Noise Power (Offset Intensity) over Lifetime.
 * Strips NPoL - Noise Position over Lifetime.
 
-
-
-* Hit:
+Hit:
 * Hit Texture - Main texture used for hit effects.
 * Hit SoL - Size over Lifetime.
 * Hit EoL - Emission over Lifetime.
 * Hit Move To Camera Fix - Moves the hit quad sprite in the direction of a Camera. Useful to adjust the world geometry intersection of screen space quads.
 
-* Hit3:
+Hit3:
 * Hi3 is a spherical explosion, I apologize for the inconsistent naming.
 * Hit3 SoL - Size over Lifetime.
 * Hit3 OoL - Opacity over Lifetime.
 * Hit3 EoL - Emission over Lifetime.
 * Source - Parameters to adjust the source Hit effects.
 
-* Main Strip:
+Main Strip:
 * Main Strip Lifetime and Hit Lifetime - Lifetime in seconds of the Main Strip and Main Strip Hit effects.
 * Main Strip Profile - Thickness profile of a lightning strip.
 * Main Strip Noise Mask Profile - Profile that controls the amount of Offset Noise applied to a lightning strip.
@@ -55,7 +53,7 @@ Most of the adjustments come from the Visual Effects Graph parameters and C# scr
 * Main Strip AoL - Alpha over Lifetime.
 * Main Strip B - Parameters that control the overall shape and emission of the second and third Main Strips. The amount of Main Strips can be changed in a C# script, check the "Min and Max Numbers Of Main Strips" parameters.
 
-* Branched Strip:
+Branched Strip:
 * Branched Lifetime and Hit Lifetime - Lifetime in seconds of the Branched Strip and Branched Strip Hit effects.
 * Branched Profile - Thickness profile of a lightning strip.
 * Branched EoL - Emission over Lifetime.
