@@ -4,172 +4,102 @@ title: Mesh Raycast
 nav_order: 3
 ---
 
-## Material Parameters
+## Quick Start
 
-Here is the description of the most tricky material parameters. Most parameters are named according to what they do to the material, but some require a more detailed explanation. Parameters sorted per shader name, you can see it on top of material when selected in the inspector. T
+* Drag And Drop VFX Prefab from the "CompleteEffectsPrefabs" folder into your scene.
+* Make the MeshRaycast VFX Prefab a child of the Mesh you want to apply Effect into.
+* Reset the Tranfrosm of the MeshRaycast VFX Prefab, be sure that Positions and Rotations are at 0.0, and Scale is at 1.0.
+* Select the Mesh Renderer in the attached C# Scripts, you can just drag the Parent Mesh object into the "Mesh" variable slot.
+* Enable "Preview Normals In Editor" and "Show Normals Hit Distance".
+* Adjust the "Max Distance" and "Max Distance Affected By Mesh Scale" parameters to set the distance. Then "Mesh Auto Scale Multiply" in runtime to adjust the scaling of VFX elements.
+* With Auto Scale Enabled you can now freely move your mesh.
 
-### General Material Parameters / DissolveParticleAdvanced:
+Most of the additional adjustments come from the Visual Effects Graph parameters and C# script. Many parameters can be changed, you can control the color, speed, overall shape of the strips, noise scale, etc.
 
+### Common Adjustments
 
-Final parameters are mostly used to adjust the result look of the effect, its emission power, color (if not using Ramp), and opacity
+* **(Scale)** To scale the effect after dropping it into your scene you can adjust the "Max Distance" parameters. The effect elements will be scaled too, because by default "Max Distance Auto Scale" is enabled.
+* **(Color)** Color can be changed in the Visual Effects Graph parameters. It is separated between each effect element. There is also a master color, so you can set all the element color parameters to white and change the master color to find the right hue.
+* **(Speed)** The Speed at which the effect is triggered can be controlled in the C# script, check the "Speed" parameter.
 
-* **Final Color** - Emission color of affected particles
-* **Final Power** - Final brightness of the image, you need to lower this value if you using "Gamma Rendering" Mode
-* **Final Opacity Power** - Adjust the opacity of the effect without changing its emission power
-* **Final Opacity Exp** - Control the smoothness(curve) of opacity mask, higher numbers will lead to more sharp transitions.
+### List Of VFX Graph Parameters
 
+![s20](/assets/images/03.png)
 
-Other Ramp parameters just used to further customize the gradient coloring mode
+* **MASTER** -  These parameters serve as a final layer of adjustments, they just multiply existing parameters by themselves.
+* **Dissolve Noise** - Use Dissolve instead of a regular alpha decay for lightning strips.
+* **Lightning** - This set of parameters controls the color, gradient transitions, and emission power of VFX elements.
+ 
+Strips:
+* **Strips Texture** - Main texture for lightning strips.
+* **Strips EoL** - Emission Over Lifetime.
+* **Strips SAoL** - Size and Alpha Over Lifetime.
+* **Strips UV Stretch and Center UV** - Stretching the UV, and the other parameter is used to center the lightning strips at the Start and the End points.
+* **Strips To Center** - Using the "Center UV" helps texture to adjust the UV of the lightning strip, making it more visually pleasing.
+* **Strips Noise** - Controls the Offset Noise that makes lightning look like lightning.
+* **Strips Noise PoL** - Noise Power (Offset Intensity) over Lifetime.
+* **Strips NPoL** - Noise Position over Lifetime.
 
-* **Ramp Enabled** - Use ramp gradient texture to colorize particles
-* **Ramp** - Gradient texture, located in "VFXTextures" folder
-* **Ramp Color Tint** - Multiply ramp texture by this color
-* **Ramp Affected By Dynamics** - How much Dynamics (dissolving and appear effects) will affect the ramp texture. So, when the particle begins to dissolve, the color of dissolve areas will change according to the ramp gradient.
-* **Ramp Offset Multiply** - Multiply the Ramp position, use it to offset ramp colors
-* **Ramp Offset Exp** - Power (Math) the Ramp position, use it to offset ramp colors but in a more smooth way.
-* **Ramp Ignore Vertex Color** - Ramp ignore the particle/vertex color
+Hit:
+* **Hit Texture** - Main texture used for hit effects.
+* **Hit SoL** - Size over Lifetime.
+* **Hit EoL** - Emission over Lifetime.
+* **Hit Move To Camera Fix** - Moves the hit quad sprite in the direction of a Camera. Useful to adjust the world geometry intersection of screen space quads.
 
+Hi3 is a spherical explosion, I apologize for the inconsistent naming:
+* **Hit3 SoL** - Size over Lifetime.
+* **Hit3 OoL** - Opacity over Lifetime.
+* **Hit3 EoL** - Emission over Lifetime.
+* **Source** - Parameters to adjust the source Hit effects.
 
-Custom Color mask is used when you need to color your particles with a ramp gradient using a specific mask.
+Main Strip:
+* **Main Strip Lifetime and Hit Lifetime** - Lifetime in seconds of the Main Strip and Main Strip Hit effects.
+* **Main Strip Profile** - Thickness profile of a lightning strip.
+* **Main Strip Noise Mask Profile** - Profile that controls the amount of Offset Noise applied to a lightning strip.
+* **Main Strip EoL** - Emission over Lifetime.
+* **Main Strip AoL** - Alpha over Lifetime.
+* **Main Strip B** - Parameters that control the overall shape and emission of the second and third Main Strips. The amount of Main Strips can be changed in a C# script, check the "Min and Max Numbers Of Main Strips" parameters.
 
-* **Custom Color Mask Channels** - What channels to use from the color mask
-* **Custom Color Mask Switch** - Enabling and disabling the mask
-* **Custom Color Mask Affected By Dynamics** - How much Dynamics (dissolving and appear effects) will affect the mask texture. So, when the particle begins to dissolve, the color of dissolve areas will change according to mask and ramp gradient.
+Branched Strip:
+* **Branched Lifetime and Hit Lifetime** - Lifetime in seconds of the Branched Strip and Branched Strip Hit effects.
+* **Branched Profile** - Thickness profile of a lightning strip.
+* **Branched EoL** - Emission over Lifetime.
+* **Branched AoL** - Alpha over Lifetime.
+* **Branched Start Min and Max** - Adjust the initial point from which the Branched Strip can be branched.
+* **Branched Noise Blend** - Blends between Main and Branched Offset Noises, don't change too much.
 
+Other Parameters:
+* **Sparks2** - Various parameters to control the size and physical properties of Spark effects. Most parameter names are self-explanatory.
+* **Transition** - Add a small touch to a lightning strip, making it appear more solid at the start and end points.
+* **Disable Parameters** - These are used to disable some parts of VFX, that are not needed.
+* **HIDDEN Parameters** - VFX Graph Won't allow hidden parameters to be changed from outside, so these are currently visible, don't change them.
 
-The second Mask is used mainly to appear the effect of Indicator Effects and some other particles. It is also controlled with Custom Vertex Stream.
+### List Of C# Script Parameters
 
-* **Second Mask Profile** - Profile gradient mask, utilizing R (emission boost) and G (opacity) channels.
-* **Second Mask Negate** - Negating/disabling the second mask
-* **Second Mask VS Move** - Moving the second mask UV, driven by Custom Vertex Stream
-* **Second Affects Distortion** - Distortion only applies to the R channel of the second mask
-* **Second Mask Noise 01 Negate** - Noise 01 will be negated in the R channel of the second mask
-* **Second Mask Affects Ramp** - R channel of the second mask will be added to the ramp, adjusting the ramp position as a result
-* **Second Mask Boosts Emission** - Boosting emission in the R channel of the second mask
-* **Second Mask Fract Switch** - Apply fract function to the second mask, making it looks like a saw wave
-* **Second Mask Fract Shrink** - Stretching the resulting fract mask
+![s20](/assets/images/02.png)
 
-
-Noise parameters are generally used to customize the mask of the effect. This is the most adjustable part of the effects, you can freely change and scale the noise textures. There are plenty of noise textures in this Asset.
-
-* **Noise, Noise 01, and Noise 02** - Noise textures for creating the final noise mask, you can play with this parameter freely and use your own noise textures
-* **Noise Scale** - Scale of the noise texture
-* **Noise Negate** - Negating the noise texture, making it full white
-* **Noise Exp** - Applying Power (Math) the Noise texture
-* **Noise Scroll Speed** - Scroll/Panning speed of the texture
-* **Noise Random Min Max** - Min and Max parameter for making a unique noise texture offset for each particle
-* **Noise Radial** - Change UV from regular to radial mapping
-
-
-Dissolve Texture is used for the dissolve/disappear effect. It has many parameters, controlling the slope of the dissolve, scale, and edges emission.
-
-* **Dissolve Texture Flip Switch** - Flip the dissolve texture colors (one minus dissolve texture colors)
-* **Dissolve Texture Scale** - Scale of the dissolve texture
-* **Dissolve Texture Min Max** - Min and Max parameter for making a unique dissolve texture offset for each particle
-* **Dissolve Texture Radial** - Change UV from regular to radial mapping
-* **Dissolve Texture Exp** - Applying Power (Math) the dissolve texture
-* **Dissolve Texture Exp Reversed** - Applying Power (Math) the dissolve texture based on particle lifetime, also in reverse
-* **Dissolve Glow** - Set of parameters, controlling the glowing edges when the dissolve is happening
-* **Dissolve Mask** - Sets the direction (with a texture mask) along which the dissolve will occur
-* **Dissolve Steepness** - Control the steepness/slope of the dissolve mask
-
-
-Distortion Texture is used for the UV distortion effect.
-
-* **Distortion Scale** - Scale of the distortion texture
-* **Distortion Power** - Amount of UV distortion
-* **Distortion Remap Min/Max** - Min and Max parameter for making a unique distortion texture offset for each particle
-* **Distortion UV or Spherical** - Vector for distortion
-* **Distortion U/V** - Control U and V channels separately
-* **Distortion Scroll Speed** - Scroll/Panning speed of the texture
-* **Distortion Radial** - Change UV fron regular to radial mapping
-
-
-Soft particles is a common effects, it is making particle less visible when they intersecting other geometry.
-
-* **Soft Particles Enabled** - Enable the soft particles effect
-* **Soft Particles Enabled** - Distance/Thickness of the effect
-
-
-### Crystal:
-
-* **Inner Rim** - Glowing inside of a crystal, you can control how much of crystal original normals are influencing this effect. You can also apply a texture mask the the whole effect.
-* **Vertical Gradient** - Vertical emission gradient in the local mesh coordinates.
-* **Appear Gradient** - Same as Vertical Gradient, but it will stay at the same playce, when changing the "Appear Vertex Y Offset" parameter to move crystal on the local Y-axis.
-* **Parallax Noise** - Noise inside the crystal, try to chane the texture and the scale of it.
-
-
-### CenterCurve:
-
-* **Second Mask** - In this shader, Second Mask is used differently. It is a projectile texture, scrolled along the UV of the mesh, making the final effect.
-* **Fresnel Mask** - Rim Mask, used to hide sharp edges of the effect mesh.
-
-
-### ShieldICO:
-
-* **Offset Texture** - Texture, used to local vertex offset.
-* **Tris Glare** - Making effect triangles to glare randomly, imitating the fake lighting.
-* **Vertical Gradient** - Applying the vertical gradient to the shield effect. You can change its forma and use custom profile texture.
-* **Inner Rim** - Simple Rim/Fresnel effect
-* **Waves** - Generating waves for offset and emission
-* **Depth Mask** - Depth Blend effect, similar to Soft Particles effect, but in this case it will boost the emission when the mesh instersect other opque geometry.
-* **Appear Gradient** - This section if used mainly for appear/disappear effects. Animate the "Appear Gradient Offset" parameter and see the results.
-
-
-### Props:
-
-* **Albedo Decal** - Coloring the decal parts of Albedo map
-* **Rim Emission** - Simple Rim/Fresnel effect
-* **Dissolve** - This section controls the dissolve/appear effect of the mesh, check the complete effects (like HammerStrine or SourceEnergyShield) for the examples.
-
-
-### MaskedDoubleSidedAdvanced:
-
-Most parameters in this shield/barrier effect shader are self explanetory. It uses many Noise textures to make the effect, you can tweak all the parameters in real-time to see what they do. Check the effects like FireBarrier or WaterBarrier to see this shader in action. The main parameter is "Appear Progress" it is animated with a regular Unity animation system.
-
-
-### DissolveParticleMV:
-
-* **MV Main Mask** - Main flip book mask
-* **MV Main Mask Motion Vectors** - Motion vectors, for the smooth slow-motion animation
-* **MV Random Frame** - Start the animation from random frame when particle is spawned
-* **MV Distortion Frame Offset** - Don't change this parameter, it is used for setting up the right value for smooth Motion Vectors transition technique
-* **MV Particle Frame Control Enabled** - Use particle system custom vertex stream instead of "MV Animation Speed" to control the animation of flip book
-
-
-### DissolveParticleGroundPacked:
-
-* **PackedTex** - Packed ground texture, you can pick from many different ones
-* **Height Slope Control** - Msaking slopes smoother
-* **Height Boost** - Increase height of PackedTex texture
-* **Height Map Negate** - Negating the B channel (baked height) of PackedTex texture
-* **Albedo** - Colorize the ground rocks
-* **Opacity Mask** - Main opacity mask, applied to the whole effect
-* **Second Mask** - Second mask is used only for appear effect (Also controlled with Custom Vertex Streams)
-* **Lava Appear Mask** - This mask is used to make lava appear, respecting the final height parameter of a texture (Also controlled with Custom Vertex Streams)
-* **Surface Noise** - Add noise texture to the final height
-* **Valleys Emission Boost** - Boosts emission if valleys
-* **Cracks** - Applying cracks texture to the albedo (color of non-emissive ground) and height
-* **Dissolve Texture** - This section is used for dissolve/disappear effect (Also controlled with Custom Vertex Streams)
-
-
-### DissolveParticleDepth:
-
-* **Rim Mask** - Simple Rim/Fresnel effect
-* **Offset Noise** - Used for the mesh/particle surface offset (Also controlled with Custom Vertex Streams)
-* **Depth Fade** - Depth fade effect (similar to the Soft Particle effect), can be flipped and will boost emission of intersecting parts instead
-
-
-### FakeTrailAndMeshFireParticle:
-
-* **Main Mask** - Main texture mask of a trail, set it to Clamp only on V coordinate
-* **Squeeze UV** - Squeezing UV towards the start point of fire/trail particle
-* **Fake Trail Scroll** - This section is used to control the scrolling animation of a trail (Also controlled with Custom Vertex Streams)
-
-
-### DissolveParticleFlipBook:
-
-This shader is basically the same as DissolveParticleAdvanced, but using flipbooks for its animation. Used mostly for electric and lightning effects, it also has dissolve/appear effects. Set the rows and columns of the material, rotate the UV as you like and it is mostly done. For other parameters, check the DissolveParticleAdvanced section on the top of this page.
+* **Preview Gizmos In Editor** - Use this to preview Gizmos in the Editor to adjust the Max Distance.
+* **Modes** - Two self-explanatory modes, Spherical and Cone.
+* **Hemisphere Distance** - Exclude the possible Raycasts from a Spherical Shape.
+* **Max Distance** - Maximum Raycast distance.
+* **Max Distance Auto Scale Enabled** - Enabled the AutoScale based on the maximum distance, disable it if you want to scale the distance in real-time, but no the effect itself.
+* **Max Distance Affected By Anchor** - Link the AutoScale to a Local Scale of a selected Transform.
+* **Max Distance Anchor Multiply** - Multiply the Anchor AutoScale value.
+* **Auto Scale Multiply** - Multiply the AutoScale value.
+* **Cone Mode Circle Min Radius** - Minimum Radius of a frustum circle of a cone.
+* **Cone Mode Circle Max Radius** - Maximum Radius of a frustum circle of a cone.
+* **Maximum Number Of Attempts** - Control the number of failed Raycast attempts, use low value for better optimization.
+* **Maximum Number Of Branched Attempts** - Control the number of failed Raycast attempts, use low value for better optimization.
+* **Min Number Of Main Strips** - Set the min and max count of spawned Lightning Strips.
+* **Man Number Of Main Strips** - Set the min and max count of spawned Lightning Strips.
+* **Min Number Of Branched Strips** - Set the min and max count of spawned Lightning Strips.
+* **Man Number Of Branched Strips** - Set the min and max count of spawned Lightning Strips.
+* **Speed** - Speed in which the VFX and Raycast are triggered.
+* **Speed Variation** - Speed variation curve, to make the VFX appear more natural.
+* **Speed Variation Time** - Displayed Variation Time, useful for very dynamic Variation Time curves.
+* **Speed Variation Time Speed** - Speed in which Time Variation is changing.
+* **Random Branched Circle Min Radius** - Branched strips are triggered using Sphere Raycast, these parameters control min and max radius.
+* **Random Branched Circle Max Radius** - Branched strips are triggered using Sphere Raycast, these parameters control min and max radius.
 
 
 
