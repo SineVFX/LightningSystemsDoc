@@ -68,7 +68,28 @@ Other Parameters:
 
 ### List Of C# Script Parameters
 
-* 
+* **Preview Gizmos In Editor** - 
+* **Modes** - 
+* **Hemisphere Distance** - 
+* **Max Distance** - 
+* **Max Distance Auto Scale Enabled** - 
+* **Max Distance Affected By Anchor** - 
+* **Max Distance Anchor Multiply** - 
+* **Auto Scale Multiply** - 
+* **Cone Mode Circle Min Radius** - 
+* **Cone Mode Circle Max Radius** - 
+* **Maximum Number Of Attempts** - 
+* **Maximum Number Of Branched Attempts** - 
+* **Min Number Of Main Strips** - 
+* **Man Number Of Main Strips** - 
+* **Min Number Of Branched Strips** - 
+* **Man Number Of Branched Strips** - 
+* **Speed** - 
+* **Speed Variation** - 
+* **Speed Variation Time** - 
+* **Speed Variation Time Speed** - 
+* **Random Branched Circle Min Radius** - 
+* **Random Branched Circle Max Radius** - 
 
 
 
