@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Material Parameters
+title: Mesh Raycast
 nav_order: 3
 ---
 
