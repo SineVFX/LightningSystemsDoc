@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Introduction and Important Notes
+title: About The Asset
 nav_order: 1
 ---
 
