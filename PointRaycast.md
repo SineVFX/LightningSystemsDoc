@@ -21,9 +21,7 @@ Most of the adjustments come from the Visual Effects Graph parameters and C# scr
 * MASTER -  These parameters serve as a final layer of adjustments, they just multiply existing parameters by themselves.
 * Dissolve Noise - Use Dissolve instead of a regular alpha decay for lightning strips.
 * Lightning - This set of parameters controls the color, gradient transitions, and emission power of VFX elements.
-
-
-
+ 
 * Strips:
 * Strips Texture - Main texture for lightning strips.
 * Strips EoL - Emission Over Lifetime.
