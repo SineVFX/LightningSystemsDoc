@@ -14,6 +14,8 @@ nav_order: 3
 * Adjust the "Max Distance" and "Max Distance Affected By Mesh Scale" parameters to set the distance. Then "Mesh Auto Scale Multiply" in runtime to adjust the scaling of VFX elements.
 * With Auto Scale Enabled you can now freely move your mesh.
 
+![s20](/assets/images/04.png)
+
 Most of the additional adjustments come from the Visual Effects Graph parameters and C# script. Many parameters can be changed, you can control the color, speed, overall shape of the strips, noise scale, etc.
 
 ### Common Adjustments
