@@ -6,7 +6,12 @@ nav_order: 2
 
 ## Quick Start
 
-Drag And Drop VFX Prefab from the "CompleteEffectsPrefabs" folder into your scene. Enable the "Preview Gizmos In Editor" bool in the attached C# script to see the range of the effect. Now you can adjust various parameters to match your project design. There are two modes for this System, Spherical, and Cone. Check the list of the adjustable parameters below.
+* Drag And Drop VFX Prefab from the "CompleteEffectsPrefabs" folder into your scene.
+* Enable the "Preview Gizmos In Editor" bool in the attached C# script to see the range of the effect.
+* Now you can adjust various parameters to match your project design.
+* There are two modes for this System, Spherical, and Cone. Check the list of the adjustable parameters below.
+
+![s20](/assets/images/05.png)
 
 Most of the adjustments come from the Visual Effects Graph parameters and C# script. Many parameters can be changed, you can control the color, speed, overall shape of the strips, noise scale, etc.
 
