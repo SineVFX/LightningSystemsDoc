@@ -68,28 +68,28 @@ Other Parameters:
 
 ### List Of C# Script Parameters
 
-* **Preview Gizmos In Editor** - 
-* **Modes** - 
-* **Hemisphere Distance** - 
-* **Max Distance** - 
-* **Max Distance Auto Scale Enabled** - 
-* **Max Distance Affected By Anchor** - 
-* **Max Distance Anchor Multiply** - 
-* **Auto Scale Multiply** - 
-* **Cone Mode Circle Min Radius** - 
-* **Cone Mode Circle Max Radius** - 
-* **Maximum Number Of Attempts** - 
-* **Maximum Number Of Branched Attempts** - 
-* **Min Number Of Main Strips** - 
-* **Man Number Of Main Strips** - 
-* **Min Number Of Branched Strips** - 
-* **Man Number Of Branched Strips** - 
-* **Speed** - 
-* **Speed Variation** - 
-* **Speed Variation Time** - 
-* **Speed Variation Time Speed** - 
-* **Random Branched Circle Min Radius** - 
-* **Random Branched Circle Max Radius** - 
+* **Preview Gizmos In Editor** - Use this to preview Gizmos in the Editor to adjust the Max Distance.
+* **Modes** - Two self-explanatory modes, Spherical and Cone.
+* **Hemisphere Distance** - Exclude the possible Raycasts from a Spherical Shape.
+* **Max Distance** - Maximum Raycast distance.
+* **Max Distance Auto Scale Enabled** - Enabled the AutoScale based on the maximum distance, disable it if you want to scale the distance in real-time, but no the effect itself.
+* **Max Distance Affected By Anchor** - Link the AutoScale to a Local Scale of a selected Transform.
+* **Max Distance Anchor Multiply** - Multiply the Anchor AutoScale value.
+* **Auto Scale Multiply** - Multiply the AutoScale value.
+* **Cone Mode Circle Min Radius** - Minimum Radius of a frustum circle of a cone.
+* **Cone Mode Circle Max Radius** - Maximum Radius of a frustum circle of a cone.
+* **Maximum Number Of Attempts** - Control the number of failed Raycast attempts, use low value for better optimization.
+* **Maximum Number Of Branched Attempts** - Control the number of failed Raycast attempts, use low value for better optimization.
+* **Min Number Of Main Strips** - Set the min and max count of spawned Lightning Strips.
+* **Man Number Of Main Strips** - Set the min and max count of spawned Lightning Strips.
+* **Min Number Of Branched Strips** - Set the min and max count of spawned Lightning Strips.
+* **Man Number Of Branched Strips** - Set the min and max count of spawned Lightning Strips.
+* **Speed** - Speed in which the VFX and Raycast are triggered.
+* **Speed Variation** - Speed variation curve, to make the VFX appear more natural.
+* **Speed Variation Time** - Displayed Variation Time, useful for very dynamic Variation Time curves.
+* **Speed Variation Time Speed** - Speed in which Time Variation is changing.
+* **Random Branched Circle Min Radius** - Branched strips are triggered using Sphere Raycast, these parameters control min and max radius.
+* **Random Branched Circle Max Radius** - Branched strips are triggered using Sphere Raycast, these parameters control min and max radius.
 
 
 
