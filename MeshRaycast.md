@@ -6,7 +6,7 @@ nav_order: 3
 
 ## Material Parameters
 
-Here is the description of the most tricky material parameters. Most parameters are named according to what they do to the material, but some require a more detailed explanation. Parameters sorted per shader name, you can see it on top of material when selected in the inspector.
+Here is the description of the most tricky material parameters. Most parameters are named according to what they do to the material, but some require a more detailed explanation. Parameters sorted per shader name, you can see it on top of material when selected in the inspector. T
 
 ### General Material Parameters / DissolveParticleAdvanced:
 
