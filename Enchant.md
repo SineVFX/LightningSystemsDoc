@@ -4,72 +4,119 @@ title: Enchant
 nav_order: 4
 ---
 
-## Custom Vertex Streams
+## Quick Start
 
-Many Particle Effects parameters are controlled via Custom Vertex Streams. Such parameters like Emission Power, Dissolve Progress, Appear and Disappear, Random Offset for Noise Textures, and etc. Check the name of a shader used in the Particle System, find it on this page, and check what each Custom Vertex Stream does. Try to modify, for example, the Dissolve Progress parameter for the "DissolveParticleAdvanced" shader and make particles disappear quicker or slower.
+* Drag And Drop VFX Prefab from the "CompleteEffectsPrefabs" folder into your scene.
+* Make the Enchant VFX Prefab a child of the Mesh you want to apply Effect into.
+* Reset the Tranfrosm of the MeshRaycast VFX Prefab, be sure that Positions and Rotations are at 0.0, and Scale is at 1.0.
+* Select the Mesh Renderer in the attached C# Scripts, you can just drag the Parent Mesh object into the "Mesh" variable slot.
+* Enable "Preview Cells In Editor" and "Show Normals Hit Distance".
+* Adjust the "Cells Scale" parameter to set the optimal Cell sizes, check the screenshot below.
+* Set the "Min Distance" to a low value, then you can adjust it in real-time. This parameter determines the minimum distance between two points used to generate a lightning strip.
+* With Auto Scale Enabled you can adjust the "Mesh Auto Scale Multiply" or "Master Scale" to scale the VFX Elements.
+* After all the above, you can now freely move and scale your mesh.
 
-![s17](/assets/images/Screenshot_17.png)
+![s20](/assets/images/07.png)
 
-For more information, you can check the official Unity Documentation: [https://docs.unity3d.com/Manual/PartSysVertexStreams.html](https://docs.unity3d.com/Manual/PartSysVertexStreams.html)
+Most of the additional adjustments come from the Visual Effects Graph parameters and C# script. Many parameters can be changed, you can control the color, speed, overall shape of the strips, noise scale, etc.
 
-### DissolveParticleSimple:
+### Common Adjustments
 
-* **Custom1.X / UV0.Z** - Random value for adjusting the offset of Main Texture
-* **Custom1.Y / UV0.W** - Random value for adjusting scale of the Main Texture
-* **Custom1.Z / UV1.X** - Dissolve progress, used to control the dissolve effect
-* **Custom1.W / UV1.Y** - Random value for flipbook frames
+* **(Scale)** If AutoScale is enabled, the effect will be scaled along with the Mesh it is attached to. Effect elements can be scaled with "Mesh Auto Scale Multiply" or "Master Scale". There are also four MASTER Scale parameters at the top of the VFX Graph settings.
+* **(Color)** Color can be changed in the Visual Effects Graph parameters. It is separated between each effect element. There is also a master color, so you can set all the element color parameters to white and change the master color to find the right hue.
+* **(Speed)** The Speed at which the effect is triggered can be controlled in the C# script, check the "Speed" parameter.
 
-### DissolveParticleAdvanced:
+### List Of VFX Graph Parameters
 
-* **Custom1.X / UV0.Z** - Random value for each particle, to make them look slightly different
-* **Custom1.Y / UV0.W** - Distortion Power Multiplier, used to control texture distortion over lifetime
-* **Custom1.Z / UV1.X** - Dissolve progress, used to control the dissolve effect
-* **Custom1.W / UV1.Y** - Emission Multiplier, control the emission power over lifetime
-* **Custom2.X / UV1.Z** - Secondary Mask offset, used to multiply opacity by moving this mask texture with Vertex Streams
-* **Custom2.Y / UV1.W** - Secondary Mask negate, use this to control how much Second Mask affecting opacity
-* **Custom2.Z / UV2.X** - Distortion Mask offset, used to multiply distortion by moving this mask texture with Vertex Streams
+![s20](/assets/images/03.png)
 
-### DissolveParticleDepth:
+* **Move Local Enabled** - Makes the Enchant VFX fully local, strips will no longer linger behind when moving the enchanted mesh.
+* **MASTER** -  These parameters serve as a final layer of adjustments, they just multiply existing parameters by themselves.
+* **Dissolve Noise** - Use Dissolve instead of a regular alpha decay for lightning strips.
+* **Lightning** - This set of parameters controls the color, gradient transitions, and emission power of VFX elements.
+ 
+Strips:
+* **Strips Texture** - Main texture for lightning strips.
+* **Strips EoL** - Emission Over Lifetime.
+* **Strips SAoL** - Size and Alpha Over Lifetime.
+* **Strips UV Stretch and Center UV** - Stretching the UV, and the other parameter is used to center the lightning strips at the Start and the End points.
+* **Strips To Center** - Using the "Center UV" helps texture to adjust the UV of the lightning strip, making it more visually pleasing.
+* **Strips Noise** - Controls the Offset Noise that makes lightning look like lightning.
+* **Strips Noise PoL** - Noise Power (Offset Intensity) over Lifetime.
+* **Strips NPoL** - Noise Position over Lifetime.
 
-* **Custom1.X / UV0.Z** - Emission Multiplier, control the emission power over the lifetime
-* **Custom1.Y / UV0.W** - Offset and Dissolve Progress, this parameter will affect both the dissolve and offset parameters
-* **Size / UV1.X** - Adjusting the scale multiplier depending on particle size (No need to modify this parameter, it is a fix)
+Hit:
+* **Hit Texture** - Main texture used for hit effects.
+* **Hit SoL** - Size over Lifetime.
+* **Hit EoL** - Emission over Lifetime.
+* **Hit Move To Camera Fix** - Moves the hit quad sprite in the direction of a Camera. Useful to adjust the world geometry intersection of screen space quads.
 
-### DissolveParticleGroundPacked:
+Source parameters:
+* **Source** - Parameters to adjust the source Hit effects.
 
-* **Custom1.X / UV0.Z** - Random value for each particle, to make them look slightly different
-* **Custom1.Y / UV0.W** - Secondary Mask (Appear/Initialize) progress, use this to make effect appear
-* **Custom1.Z / UV1.X** - Dissolve progress, used to control the dissolve effect
-* **Custom1.W / UV1.Y** - Emission Multiplier, control the emission power over lifetime
-* **Custom2.X / UV1.Z** - Lava Appear progress, control the appearence of lava
+Main Strip:
+* **Main Strip Lifetime and Hit Lifetime** - Lifetime in seconds of the Main Strip and Main Strip Hit effects.
+* **Main Strip Profile** - Thickness profile of a lightning strip.
+* **Main Strip Noise Mask Profile** - Profile that controls the amount of Offset Noise applied to a lightning strip.
+* **Main Strip EoL** - Emission over Lifetime.
+* **Main Strip AoL** - Alpha over Lifetime.
+* **Main Strip B** - Parameters that control the overall shape and emission of the second and third Main Strips. The amount of Main Strips can be changed in a C# script, check the "Min and Max Numbers Of Main Strips" parameters.
 
-### FakeTrailAndMeshFireParticles:
+Branched Strip:
+* **Branched Lifetime and Hit Lifetime** - Lifetime in seconds of the Branched Strip and Branched Strip Hit effects.
+* **Branched Profile** - Thickness profile of a lightning strip.
+* **Branched EoL** - Emission over Lifetime.
+* **Branched AoL** - Alpha over Lifetime.
+* **Branched Start Min and Max** - Adjust the initial point from which the Branched Strip can be branched.
+* **Branched Noise Blend** - Blends between Main and Branched Offset Noises, don't change too much.
 
-* **Custom1.X / UV0.Z** - Control the U gradient mask, used for fade in and fade out effects of the fire
-* **Custom1.Y / UV0.W** - Custom UV offset animation, moving the whole fire mask texture, used to make moving fire trail look more realistic
-* **Custom1.Z / UV1.X** - Random value for each particle, to make them look slightly different
+Arc:
+* **Arc Initial Power** - Controls the Arc initial offset.
+* **Arc PoL** - Controls the Arc Offset over lifetime.
 
-### DissolveParticleMV / DissolveParticleFlipBook:
+Other Parameters:
+* **Transition** - Add a small touch to a lightning strip, making it appear more solid at the start and end points.
+* **SDF** - Slot for a baked SDF, check the instructions below.
+* **Disable Parameters** - These are used to disable some parts of VFX, that are not needed.
+* **HIDDEN Parameters** - VFX Graph Won't allow hidden parameters to be changed from outside, so these are currently visible, don't change them.
 
-* **Custom1.X / UV0.Z** - Random value for each particle, to make them look slightly different
-* **Custom1.Y / UV0.W** - Distortion Power Multiplier, used to control texture distortion over lifetime
-* **Custom1.Z / UV1.X** - Dissolve progress, used to control the dissolve effect
-* **Custom1.W / UV1.Y** - Emission Multiplier, control the emission power over lifetime
-* **Custom2.X / UV1.Z** - Secondary Mask offset, used to multiply opacity by moving this mask texture with Vertex Streams
-* **Custom2.Y / UV1.W** - Secondary Mask negate, use this to control how much Second Mask affecting opacity
-* **Custom2.Z / UV2.X** - Distortion Mask offset, used to multiply distortion by moving this mask texture with Vertex Streams
-* **Custom2.W / UV2.Y** - Custom frame animation control for a flipbook texture, enable "MV Particle Frame Control Enabled" parameter in material settings to use this Vertex Stream.
+### Baking SDF For Better Visuals
 
-### CenterCurve:
+SDF (Signed Distance Field) is used to create better visuals for the Enchant Effect. With SDF, lightning stips will now try to curve around the mesh, avoiding the intersections. You can bake the SDF for your mesh using Unity Tools, navigate Windows > Visual Effect > Utilities > SDF Bake Tool. Set the desired resolution, click "Fit Box To Mesh", then click Bake Mesh. After all of this, you can save the SDF. But before this, save all the transform parameters, "Box Center" and "Desired Box Size".
 
-* **Custom1.X / UV0.Z** - Random value for each particle, to make them look slightly different
-* **Custom1.Y / UV0.W** - Emission Multiplier, control the emission power over lifetime
-* **Custom1.Z / UV1.X** - Dissolve progress, used to control the dissolve effect
-* **Custom1.W / UV1.Y** - Second Mask offset progress, used to move the second mask on V coordinate
+![s20](/assets/images/09.png)
 
-### Props:
+Now enable the "SDF Enabled" parameter, set the baked SDF Texture, and paste the saved transform parameters in an "SFD Center" and "SDF Size".
 
-* **Custom1.Z / UV1.X** - Dissolve/Appear Effect progress control. Used to control the dissolve effect of the mesh when it appears or disappears.
+![s20](/assets/images/10.png)
+
+### List Of C# Script Parameters
+
+![s20](/assets/images/08.png)
+
+* **Preview Gizmos In Editor** - Use this to preview Gizmos in the Editor to adjust the Max Distance.
+* **Show Normal Hit Distance** - Displays the actual Raycast distances from mesh normals.
+* **Mesh** - Mesh to which the VFX will be applied.
+* **Max Distance** - Maximum Raycast distance.
+* **Max Distance Affected By Mesh Scale** - Local mesh scale now affects the maximum Raycast distance.
+* **Max Distance Affected By Mesh Scale Multiply** - Multiply the max distance by this value.
+* **Mesh Scale Auto Scale Enabled** - Enabled the AutoScale, now the VFX Elements will be scaled with the mesh.
+* **Mesh Scale Auto Scale Enabled Multiply** - Multiply the AutoScale parameter by this value.
+* **Normal Adjust Enabled** -Enabled the Normal adjust mode, be sure to enable the "Preview Gizmos In Editor" bool to see how this mode affects the normals.
+* **Normal Adjust** - Direction in which normals will be slightly offset.
+* **Normal Adjust Amount** - Amount of normal adjust/offset.
+* **Maximum Number Of Attempts** - Control the number of failed Raycast attempts, use low value for better optimization.
+* **Maximum Number Of Branched Attempts** - Control the number of failed Raycast attempts, use low value for better optimization.
+* **Min Number Of Main Strips** - Set the min and max count of spawned Lightning Strips.
+* **Man Number Of Main Strips** - Set the min and max count of spawned Lightning Strips.
+* **Min Number Of Branched Strips** - Set the min and max count of spawned Lightning Strips.
+* **Man Number Of Branched Strips** - Set the min and max count of spawned Lightning Strips.
+* **Speed** - Speed in which the VFX and Raycast are triggered.
+* **Speed Variation** - Speed variation curve, to make the VFX appear more natural.
+* **Speed Variation Time** - Displayed Variation Time, useful for very dynamic Variation Time curves.
+* **Speed Variation Time Speed** - Speed in which Time Variation is changing.
+* **Random Branched Circle Min Radius** - Branched strips are triggered using Sphere Raycast, these parameters control min and max radius.
+* **Random Branched Circle Max Radius** - Branched strips are triggered using Sphere Raycast, these parameters control min and max radius.
 
 
 
