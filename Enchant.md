@@ -94,23 +94,17 @@ Now enable the "SDF Enabled" parameter, set the baked SDF Texture, and paste the
 
 ![s20](/assets/images/08.png)
 
-* **Preview Gizmos In Editor** - Use this to preview Gizmos in the Editor to adjust the Max Distance.
-* **Show Normal Hit Distance** - Displays the actual Raycast distances from mesh normals.
+* **Modes** - Two modes with self-explanatory names, the first one will create a lightning strip between two adjusted cells, and the other one with any other cell.
+* **Preview Cells In Editor** - Use this to preview the Cell Gizmos in the Editor to adjust the Cell Sizes.
+* **Min Distance** - Minimum allowed distance between two points in Local Space.
 * **Mesh** - Mesh to which the VFX will be applied.
-* **Max Distance** - Maximum Raycast distance.
-* **Max Distance Affected By Mesh Scale** - Local mesh scale now affects the maximum Raycast distance.
-* **Max Distance Affected By Mesh Scale Multiply** - Multiply the max distance by this value.
 * **Mesh Scale Auto Scale Enabled** - Enabled the AutoScale, now the VFX Elements will be scaled with the mesh.
 * **Mesh Scale Auto Scale Enabled Multiply** - Multiply the AutoScale parameter by this value.
-* **Normal Adjust Enabled** -Enabled the Normal adjust mode, be sure to enable the "Preview Gizmos In Editor" bool to see how this mode affects the normals.
-* **Normal Adjust** - Direction in which normals will be slightly offset.
-* **Normal Adjust Amount** - Amount of normal adjust/offset.
+* **Master Scale** - Act like the previous parameter, it scales the VFX elements, I just separated these two for visual clarity.
 * **Maximum Number Of Attempts** - Control the number of failed Raycast attempts, use low value for better optimization.
-* **Maximum Number Of Branched Attempts** - Control the number of failed Raycast attempts, use low value for better optimization.
 * **Min Number Of Main Strips** - Set the min and max count of spawned Lightning Strips.
 * **Man Number Of Main Strips** - Set the min and max count of spawned Lightning Strips.
-* **Min Number Of Branched Strips** - Set the min and max count of spawned Lightning Strips.
-* **Man Number Of Branched Strips** - Set the min and max count of spawned Lightning Strips.
+* **Bonus Branch Probability** - Probability to spawn an additional lightning strip.
 * **Speed** - Speed in which the VFX and Raycast are triggered.
 * **Speed Variation** - Speed variation curve, to make the VFX appear more natural.
 * **Speed Variation Time** - Displayed Variation Time, useful for very dynamic Variation Time curves.
