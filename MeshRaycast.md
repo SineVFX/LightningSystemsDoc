@@ -20,7 +20,7 @@ Most of the additional adjustments come from the Visual Effects Graph parameters
 
 ### Common Adjustments
 
-* **(Scale)** To scale the effect after dropping it into your scene you can adjust the "Max Distance" parameters. The effect elements will be scaled too, because by default "Max Distance Auto Scale" is enabled.
+* **(Scale)** If AutoScale is enabled, the effect will be scaled along with the Mesh it is attached to. But you still can manually scale the distance by adjusting the "Max Distance" parameter. Effect elements can be scaled with "Mesh Auto Scale Multiply" or "Auto Scale Multiply". There are also four MASTER Scale parameters at the top of the VFX Graph settings.
 * **(Color)** Color can be changed in the Visual Effects Graph parameters. It is separated between each effect element. There is also a master color, so you can set all the element color parameters to white and change the master color to find the right hue.
 * **(Speed)** The Speed at which the effect is triggered can be controlled in the C# script, check the "Speed" parameter.
 
@@ -73,23 +73,25 @@ Branched Strip:
 Other Parameters:
 * **Sparks2** - Various parameters to control the size and physical properties of Spark effects. Most parameter names are self-explanatory.
 * **Transition** - Add a small touch to a lightning strip, making it appear more solid at the start and end points.
+* **Stretch** - You can add a stretch effect along the selected direction, useful for action-based effects.
 * **Disable Parameters** - These are used to disable some parts of VFX, that are not needed.
 * **HIDDEN Parameters** - VFX Graph Won't allow hidden parameters to be changed from outside, so these are currently visible, don't change them.
 
 ### List Of C# Script Parameters
 
-![s20](/assets/images/02.png)
+![s20](/assets/images/06.png)
 
 * **Preview Gizmos In Editor** - Use this to preview Gizmos in the Editor to adjust the Max Distance.
-* **Modes** - Two self-explanatory modes, Spherical and Cone.
-* **Hemisphere Distance** - Exclude the possible Raycasts from a Spherical Shape.
+* **Show Normal Hit Distance** - Displays the actual Raycast distances from mesh normals.
+* **Mesh** - Mesh to which the VFX will be applied.
 * **Max Distance** - Maximum Raycast distance.
-* **Max Distance Auto Scale Enabled** - Enabled the AutoScale based on the maximum distance, disable it if you want to scale the distance in real-time, but no the effect itself.
-* **Max Distance Affected By Anchor** - Link the AutoScale to a Local Scale of a selected Transform.
-* **Max Distance Anchor Multiply** - Multiply the Anchor AutoScale value.
-* **Auto Scale Multiply** - Multiply the AutoScale value.
-* **Cone Mode Circle Min Radius** - Minimum Radius of a frustum circle of a cone.
-* **Cone Mode Circle Max Radius** - Maximum Radius of a frustum circle of a cone.
+* **Max Distance Affected By Mesh Scale** - Local mesh scale now affects the maximum Raycast distance.
+* **Max Distance Affected By Mesh Scale Multiply** - Multiply the max distance by this value.
+* **Mesh Scale Auto Scale Enabled** - Enabled the AutoScale, now the VFX Elements will be scaled with the mesh.
+* **Mesh Scale Auto Scale Enabled Multiply** - Multiply the AutoScale parameter by this value.
+* **Normal Adjust Enabled** -Enabled the Normal adjust mode, be sure to enable the "Preview Gizmos In Editor" bool to see how this mode affects the normals.
+* **Normal Adjust** - Direction in which normals will be slightly offset.
+* **Normal Adjust Amount** - Amount of normal adjust/offset.
 * **Maximum Number Of Attempts** - Control the number of failed Raycast attempts, use low value for better optimization.
 * **Maximum Number Of Branched Attempts** - Control the number of failed Raycast attempts, use low value for better optimization.
 * **Min Number Of Main Strips** - Set the min and max count of spawned Lightning Strips.
