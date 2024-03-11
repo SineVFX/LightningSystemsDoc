@@ -73,10 +73,9 @@ Branched Strip:
 * **Branched Noise Blend** - Blends between Main and Branched Offset Noises, don't change too much.
 
 Branched Arc:
-* d
-* d
-* d
-* d
+* **Branched Arc Offset** - Set of parameters, controlling the vertex offset of lightning arc effect
+* **Branched Arc Probability** - Probability for spawning lightning arc for each tick.
+* **Branched Arc Noise And Transparency Masks** - Masks used to control noise intensity and transparency along the strip length.
 
 Other Parameters:
 * **Sparks2** - Various parameters to control the size and physical properties of Spark effects. Most parameter names are self-explanatory.
@@ -88,14 +87,13 @@ Other Parameters:
 
 ![s20](/assets/images/12.png)
 
-* **Modes** - Two modes with self-explanatory names, the first one will create a lightning strip between two adjusted cells, and the other one with any other cell.
-* **Preview Cells In Editor** - Use this to preview the Cell Gizmos in the Editor to adjust the Cell Sizes.
-* **Min Distance** - Minimum allowed distance between two points in Local Space.
-* **Mesh** - Mesh to which the VFX will be applied.
-* **Mesh Scale Auto Scale Enabled** - Enabled the AutoScale, now the VFX Elements will be scaled with the mesh.
-* **Mesh Scale Auto Scale Enabled Multiply** - Multiply the AutoScale parameter by this value.
+* **Preview Chain Points In Editor** - Use this to preview the Cell Gizmos in the Editor to adjust the Cell Sizes.
+* **VFX Enabled** - This System may be smoothly turned on or off, instead of setting speed to 0, you can just change this bool.
+* **Chain Points** - Array of transforms, used to generate chain point positions.
 * **Master Scale** - Act like the previous parameter, it scales the VFX elements, I just separated these two for visual clarity.
-* **Maximum Number Of Attempts** - Control the number of failed Raycast attempts, use low value for better optimization.
+* **Auto Scale Enabled** - Enabled the AutoScale mode, it is recommended to turn this on at all times.
+* **Auto Scale Anchor** - Anchor used to drive the AutoScale of the VFX.
+* **Auto Scale Multiply** - Multiply the Auto Scale but this value.
 * **Min Number Of Main Strips** - Set the min and max count of spawned Lightning Strips.
 * **Man Number Of Main Strips** - Set the min and max count of spawned Lightning Strips.
 * **Bonus Branch Probability** - Probability to spawn an additional lightning strip.
