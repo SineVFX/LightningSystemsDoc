@@ -10,6 +10,9 @@ nav_order: 3
 * Make the MeshRaycast VFX Prefab a child of the Mesh you want to apply Effect into.
 * Reset the Tranfrosm of the MeshRaycast VFX Prefab, be sure that Positions and Rotations are at 0.0, and Scale is at 1.0.
 * Select the Mesh Renderer in the attached C# Scripts, you can just drag the Parent Mesh object into the "Mesh" variable slot.
+* !!! Make sure that the Mesh you selected has "Read/Write" enabled, it is required to get all the vertex info.
+ ![s20](/assets/images/13.png)
+* It is also recommended to use a special invisible mesh for raycasting, you can just disable its Mesh Renderer component, but not remove it.
 * Enable "Preview Normals In Editor" and "Show Normals Hit Distance".
 * Adjust the "Max Distance" and "Max Distance Affected By Mesh Scale" parameters to set the distance. Then "Mesh Auto Scale Multiply" in runtime to adjust the scaling of VFX elements.
 * With Auto Scale Enabled you can now freely move your mesh.
