@@ -10,6 +10,9 @@ nav_order: 4
 * Make the Enchant VFX Prefab a child of the Mesh you want to apply Effect into.
 * Reset the Tranfrosm of the MeshRaycast VFX Prefab, be sure that Positions and Rotations are at 0.0, and Scale is at 1.0.
 * Select the Mesh Renderer in the attached C# Scripts, you can just drag the Parent Mesh object into the "Mesh" variable slot.
+* !!! Make sure that the Mesh you selected has "Read/Write" enabled, it is required to get all the vertex info.
+ ![s20](/assets/images/13.png)
+* It is also recommended to use a special invisible mesh for raycasting, you can just disable its Mesh Renderer component, but not remove it.
 * Enable "Preview Cells In Editor" and "Show Normals Hit Distance".
 * Adjust the "Cells Scale" parameter to set the optimal Cell sizes, check the screenshot below.
 * Set the "Min Distance" to a low value, then you can adjust it in real-time. This parameter determines the minimum distance between two points used to generate a lightning strip.
